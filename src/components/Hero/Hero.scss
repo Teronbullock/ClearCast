@@ -1,0 +1,100 @@
+@use '../../assets/sass/01-helpers/breakpoint' as bp;
+
+.hero {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 1px 1px 2px rgb(0,0,0, 0.2);
+  text-transform: capitalize;
+  line-height: 1.2;
+  text-shadow: 1px 1px 2px rgb(0,0,0, 0.5);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    height: 100%;
+    width: 100%;
+    top:0;
+    left: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 0;
+  }
+
+}
+
+.hero * {
+  z-index: 10;
+  position: relative;
+}
+
+.hero-section {
+  margin-bottom: 1.25rem;
+}
+
+.hero-info-standout {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  
+  @include bp.breakPointUp(sm) {
+    font-size: 1.5rem;
+  }
+
+  @include bp.breakPointUp(md) {
+    font-size: 1.85rem;
+  }
+}
+
+.hero-info-standout--top {
+  margin: 0 0 0.75rem;
+}
+
+
+.hero-local-info {
+  &--time {
+    margin: 0 0 1rem;
+  }
+}
+
+.hero-info-small {
+  margin: 0;
+  font-size: 1rem;
+  
+  @include bp.breakPointUp(sm) {
+    font-size: 1.3rem;
+  }
+}
+
+
+.hero-current-temp {
+  margin: 0;
+  text-align: center;
+  font-size: 3.5rem;
+
+  @include bp.breakPointUp(sm) {
+    font-size: 4rem;
+  }
+
+  @include bp.breakPointUp(md) {
+    font-size: 4.68rem;
+  }
+}
+
+.hero-weather-info {
+  margin: 0;
+  font-size: 1.12rem;
+  
+  @include bp.breakPointUp(sm) {
+    font-size: 1.25rem;
+  }
+  
+  @include bp.breakPointUp(md) {
+    margin: 1rem 0;
+    font-size: 1.87rem;
+  }
+}

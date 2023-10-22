@@ -1,0 +1,45 @@
+@use '../../assets/sass/01-helpers/breakpoint' as bp;
+
+.detail-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 40px;
+  width: 95%;
+  align-items: center;
+
+  @include bp.breakPointUp(md) {
+    grid-template-rows: 55px;
+  }
+}
+
+.detail-info__title,
+.detail-info__info {
+  color: #fff9f9;
+  margin: 0.5rem 0;
+}
+
+.detail-info__title {
+  font-size: 1rem;
+  letter-spacing: 1px;
+
+  @include bp.breakPointUp(md) {
+    font-size: 1.25rem;
+  }
+
+  @include bp.breakPointUp(lg) {
+    font-size: 1.5rem;
+  }
+}
+
+.detail-info__info {
+  font-size: 0.9rem;
+
+  @include bp.breakPointUp(md) {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+  }
+
+  @include bp.breakPointUp(lg) {
+    font-size: 1.25rem;
+  }
+}

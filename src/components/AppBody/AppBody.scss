@@ -1,0 +1,22 @@
+@use '../../assets/sass/01-helpers/breakpoint' as bp;
+
+.app-body {
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: #174b9f;
+  color: #fff;
+  text-align: center;
+}
+
+
+.app-body__section {
+
+  @include bp.breakPointUp(md) {
+    max-width: 70%;
+    margin: auto;
+  }
+
+  @include bp.breakPointUp(xl) {
+    width: 50%;
+  }
+}

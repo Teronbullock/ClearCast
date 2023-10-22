@@ -1,0 +1,53 @@
+/* ================================= 
+  Media Queries
+==================================== */
+// Breakpoints
+
+// Small devices
+$break-xs: 374px;
+// Small devices
+$break-sm: 375px;
+// Medium devices
+$break-m: 768px;
+// Large devices
+$break-l: 992px;
+// Extra large devices
+$break-xl: 1200px;
+// Retna devices
+$break-ret: 1400px;
+// 4k large devices
+$break-4k: 2560px;
+
+@mixin breakPointUp($break) {
+
+  @if $break == 'xs' {
+    @media (max-width: $break-xs) {
+      @content;
+    }
+  } @else if $break == 'sm' {
+    @media (min-width: $break-sm) {
+      @content;
+    }
+  } @else if $break == 'md' {
+    @media (min-width: $break-m) {
+      @content;
+    }
+  } @else if $break == 'lg' {
+    @media (min-width: $break-l) {
+      @content;
+    }
+  } @else if $break == 'xl' {
+    @media (min-width: $break-xl) {
+      @content;
+    }
+  } @else if $break == 'xxl' {
+    @media (min-width: $break-xxl) {
+      @content;
+    }
+  } @else if $break == '4k' {
+    @media (min-width: $break-4k) {
+      @content;
+    }
+  }
+
+}
