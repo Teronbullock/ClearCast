@@ -15,10 +15,6 @@
   @include bp.breakPointUp(md) {
     font-size: 1.25rem;
   }
-
-  @include bp.breakPointUp(lg) {
-    font-size: 1.5rem;
-  }
 }
 
 .hourly-weather__item {

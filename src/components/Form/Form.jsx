@@ -43,11 +43,25 @@ export default function Form() {
     let weatherDataRes;
 
     if (isZipCode) {
-      weatherDataRes = await new GetApi('zip', inputValue).getData();
-      setWeatherData(weatherDataRes);
+
+      try {
+        weatherDataRes = await new GetApi('zip', inputValue).getData();
+        setWeatherData(weatherDataRes);
+        
+      } catch (err) {
+        console.log('There was an error obtaining your city', err);
+        alert('There was an error obtaining your city, please try again');
+      }
     } else if ( isCity2DigitState || isCityState ) {
-      weatherDataRes = await new GetApi('city', inputValue).getData();
-      setWeatherData(weatherDataRes);
+
+      try {
+        weatherDataRes = await new GetApi('city', inputValue).getData();
+        setWeatherData(weatherDataRes);
+      } catch (err) {
+        console.log('There was an error obtaining your city: ', err.message);
+        alert('There was an error obtaining your city, please try again');
+      }
+
     } else {
 
 

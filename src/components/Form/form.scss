@@ -12,19 +12,19 @@
   border-radius: 20px;
   border: #fff 1px solid;
   display: block;
-  font-size: 12px;
+  font-size: 0.75rem;
   background-color: rgba(251, 253, 255, 0);
   text-align: center;
 
   @media (min-width: 320px) {
-    font-size: 14px;
+    font-size: 0.87rem;
   }
   @include bp.breakPointUp(sm) {
-    font-size: 15px;
+    font-size: 0.93rem;
   }
 
   @include bp.breakPointUp(md) {
-    font-size: 22px;
+    font-size: 1.375rem;
   }
 }
 

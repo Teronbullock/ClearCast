@@ -73,8 +73,9 @@ export default class GetApi {
         ...hourlyWeatherRes,
       };
 
-    } catch (error) {
-      console.error(`Error in obtaining weather data: ${error}`);
+    } catch (err) {
+      console.error(`Error in obtaining weather data: ${err}`);
+      throw new TypeError(err.response.data.message);
     }
 
   }

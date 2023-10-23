@@ -83,7 +83,6 @@ export const WeatherProvider = ({ children }) => {
         setWeatherData(false);
       } else if (data !== false) {
         setWeatherData(data);
-        // setWeatherData(false);
       }
     });
 
