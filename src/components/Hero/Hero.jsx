@@ -29,9 +29,22 @@ export default function Hero() {
 
   return (
     <>
-    { (weatherData === false || weatherData === null) ? (
+    { weatherData === false ? (
       <div className="hero">
-        <p className="hero-info-small">
+        <p className="hero-info-message">
+          Please enable your browser location settings
+        </p>
+        <p className="hero-info-message">
+          or
+        </p>
+        <p className="hero-info-message">
+          enter the city info.
+        </p>
+      </div>
+    ) :
+     weatherData === null ? (
+      <div className="hero">
+        <p className="hero-info-message">
           Loading Weather Data Please wait...
         </p>
       </div>
