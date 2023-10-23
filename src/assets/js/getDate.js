@@ -9,7 +9,7 @@ export default function getDate(dateType, optType = null, input = null ) {
   };
   
   // add minutes
-  if ( optType !== null && optType.trim().length !== 0 || optType === 'min') {
+  if ( ( optType !== null && optType.trim().length !== 0 ) || optType === 'min') {
     opt['minute'] = '2-digit';
   }
 
