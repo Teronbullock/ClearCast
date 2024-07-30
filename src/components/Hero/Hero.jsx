@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import './Hero.scss';
-import { WeatherContext } from "../../contexts/WeatherContext";
-import getDate from '../../assets/js/getDate';
-import getBackground from '../../assets/js/getBackground';
+import { WeatherContext } from "@/contexts/WeatherContext";
+import getDate from '@/lib/getDate';
+import getBackground from '@/lib/getBackground';
 
 
 

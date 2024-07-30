@@ -1,7 +1,9 @@
+"use client";
+
 import { useContext, useState } from 'react';
-import { WeatherContext } from '../../contexts/WeatherContext';
-import GetApi from '../../assets/js/getApi';
-import './form.scss';
+import { WeatherContext } from '@/contexts/WeatherContext';
+import GetApi from '@/lib/getApi';
+
 
 export default function Form() {
   const { setWeatherData } = useContext(WeatherContext);
@@ -74,14 +76,14 @@ export default function Form() {
   
 
   return (
-    <div className="form-container">
+    <div className="form-container mb-6">
       <form 
         className="form" 
         onSubmit={handleFromSubmit}
       >
         <input
           id="form__input"
-          className="form__input"
+          className="form__input block text-center bg-[#FBFDFF00] text-xs w-[85%] mx-auto p-2 rounded-[20px] border border-white placeholder:text-white sm:text-base"
           type="text"
           name="searchinput"
           placeholder={isPlaceholder ? "Zip Code or City, State" : " "}

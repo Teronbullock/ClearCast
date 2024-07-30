@@ -1,19 +1,19 @@
-import getDate from './getDate';
-import clear01 from '../img/clear01.jpg';
-import clear02 from '../img/clear02.jpg';
-import clouds01 from '../img/clouds01.jpg';
-import clouds02 from '../img/clouds02.jpg';
-import rain01 from '../img/rain01.jpg';
-import rain02 from '../img/rain02.jpg';
-import drizzle01 from '../img/drizzle01.jpg';
-import drizzle02 from '../img/drizzle02.jpg';
-import thunderstorm01 from '../img/thunderstorm01.jpg';
-import thunderstorm02 from '../img/thunderstorm02.jpg';
-import snow01 from '../img/snow01.jpg';
-import snow02 from '../img/snow02.jpg';
-import fog01 from '../img/fog01.jpg';
-import fog02 from '../img/fog02.jpg';
-import atmosphere01 from '../img/atmosphere01.jpg';
+import getDate from '@/lib/getDate';
+import clear01 from '../../public/assets/img/clear01.jpg';
+import clear02 from '../../public/assets/img/clear02.jpg';
+import clouds01 from '../../public/assets/img/clouds01.jpg';
+import clouds02 from '../../public/assets/img/clouds02.jpg';
+import rain01 from '../../public/assets/img/rain01.jpg';
+import rain02 from '../../public/assets/img/rain02.jpg';
+import drizzle01 from '../../public/assets/img/drizzle01.jpg';
+import drizzle02 from '../../public/assets/img/drizzle02.jpg';
+import thunderstorm01 from '../../public/assets/img/thunderstorm01.jpg';
+import thunderstorm02 from '../../public/assets/img/thunderstorm02.jpg';
+import snow01 from '../../public/assets/img/snow01.jpg';
+import snow02 from '../../public/assets/img/snow02.jpg';
+import fog01 from '../../public/assets/img/fog01.jpg';
+import fog02 from '../../public/assets/img/fog02.jpg';
+import atmosphere01 from '../../public/assets/img/atmosphere01.jpg';
 
 
 

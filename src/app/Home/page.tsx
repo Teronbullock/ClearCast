@@ -1,23 +1,24 @@
-import{ useContext } from 'react';
-import Form from '../components/Form/Form';
-import Hero from '../components/Hero/Hero';
-import AppBody from '../components/AppBody/AppBody';
-import DetailCardHourlyInfo from '../components/DetailCardHourlyInfo/DetailCardHourlyInfo';
-import DetailCard from '../components/DetailCard/DetailCard';
-import DetailCardInfo from '../components/DetailCardInfo/DetailCardInfo'; 
-import { WeatherContext } from '../contexts/WeatherContext';
-import getDate from '../assets/js/getDate';
+"use client";
+
+import Form from '@/components/Form/Form';
+import Hero from '@/components/Hero/Hero';
+import AppBody from '@/components/AppBody/AppBody';
+import DetailCardHourlyInfo from '@/components/DetailCardHourlyInfo/DetailCardHourlyInfo';
+import DetailCard from '@/components/DetailCard/DetailCard';
+import DetailCardInfo from '@/components/DetailCardInfo/DetailCardInfo'; 
+import UseWeatherContext from '@/contexts/hooks/UseWeatherContext';
+import getDate from '@/lib/getDate';
 
 
 
-export default function Home () {
-  const { weatherData } = useContext(WeatherContext);
+export const Home = () => {
+  const { weatherData } = UseWeatherContext();
   let sunrise;
   let sunset;
 
   if (weatherData) {
-    sunrise = getDate('time', 'min',weatherData.sunrise);
-    sunset = getDate('time', 'min',weatherData.sunset);
+    sunrise = getDate('time', 'min', weatherData.sunrise);
+    sunset = getDate('time', 'min', weatherData.sunset);
   }
 
 
@@ -25,6 +26,7 @@ export default function Home () {
   return (
     <>
       <AppBody>
+        <h1>Hello World</h1>
         <Form />
         <Hero />
         { (weatherData !== false && weatherData !== null) ? (
@@ -34,7 +36,7 @@ export default function Home () {
           </DetailCard>
           <DetailCard>
             <DetailCardInfo
-              title_1={'Sunrise'}
+              // title_1={'Sunrise'}
               title_2={'Sunset'}
               info_1={sunrise}
               info_2={sunset}
@@ -55,11 +57,11 @@ export default function Home () {
               data = {[
                 {
                   title: 'Humidity',
-                  info: weatherData.humidity,
+                  // info: weatherData.humidity,
                 },
                 {
                   title: 'Pressure',
-                  info: weatherData.pressure,
+                  // info: weatherData.pressure,
                 }
               ]}
             />
@@ -70,11 +72,11 @@ export default function Home () {
                 [
                   {
                     title: 'Wind',
-                    info: weatherData.wind,
+                    // info: weatherData.wind,
                   },
                   {
                     title: 'Feels Like',
-                    info: weatherData.realFeel,
+                    // info: weatherData.realFeel,
                   }
                 ]
               }
@@ -85,4 +87,6 @@ export default function Home () {
       </AppBody>
     </>
   ); 
-}
+};
+
+export default Home;

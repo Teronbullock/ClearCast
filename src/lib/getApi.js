@@ -5,20 +5,20 @@ import getDate from './getDate';
 
 // Configs api call
 export default class GetApi {
-
   constructor(localType, apiInput) {
     this.localType = localType;
-    this.apiKey = process.env.REACT_APP_API_KEY; 
+    this.apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY; 
     this.baseUrl = 'https://api.openweathermap.org/data/2.5/';
     this.zip = `?zip=${apiInput},us&units=imperial&appid=${this.apiKey}`;
     this.city = `?q=${apiInput},us&units=imperial&appid=${this.apiKey}`;
     this.geo = `?lat=${apiInput.lat}&lon=${apiInput.lon}&units=imperial&appid=${this.apiKey}`;
     this.endingUrl = '';
   }
-
+  
   // send the axios request
   async getData() {
-
+    console.log('GetApi', process.env);
+    
     if (this.localType === 'zip') {
       this.endingUrl = this.zip;
     } else if (this.localType === 'city') {
@@ -48,7 +48,7 @@ export default class GetApi {
       });
 
       let hourlyWeatherRes = await axios.get(this.baseUrl + 'forecast' + this.endingUrl).then( res => {
-       
+      
         const data = res.data.list.slice(0, 4).map((list, index) => {
           return {
             time: getDate('time','',list.dt ),
@@ -65,8 +65,8 @@ export default class GetApi {
         };
       });
 
-      // console.log('currentWeatherRes:', currentWeatherRes);
-      // console.log('hourlyWeatherRes:', hourlyWeatherRes);
+      console.log('currentWeatherRes:', currentWeatherRes);
+      console.log('hourlyWeatherRes:', hourlyWeatherRes);
 
       return {
         ...currentWeatherRes,
@@ -81,3 +81,5 @@ export default class GetApi {
   }
 
 }
+
+
