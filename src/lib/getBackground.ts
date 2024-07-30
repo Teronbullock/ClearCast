@@ -1,3 +1,4 @@
+import { StaticImageData } from 'next/image';
 import getDate from '@/lib/getDate';
 import clear01 from '../../public/assets/img/clear01.jpg';
 import clear02 from '../../public/assets/img/clear02.jpg';
@@ -15,123 +16,129 @@ import fog01 from '../../public/assets/img/fog01.jpg';
 import fog02 from '../../public/assets/img/fog02.jpg';
 import atmosphere01 from '../../public/assets/img/atmosphere01.jpg';
 
+interface TimeOfDayInterface {
+  sunrise: number;
+  sunset: number;
+}
 
 
-export default function getBackground(weatherCondition, timeOfDay) {
-  
-  let bgOBJ = {};
+export default function getBackground(
+  weatherCondition: string,
+  timeOfDay: TimeOfDayInterface
+) {
+
+  let bgImgObj: StaticImageData;
+  let bgColor = '';
+  let bgImg = '';
   let sunrise;
   let sunset;
 
-
   if (timeOfDay) {
-    sunrise = getDate('time','24hr',timeOfDay.sunrise);
-    sunset = getDate('time','24hr',timeOfDay.sunset);
+    sunrise = getDate('24hr', timeOfDay.sunrise);
+    sunset = getDate('24hr', timeOfDay.sunset);
   } else {
-    sunrise = getDate('time','24hr',);
-    sunset = getDate('time','24hr',);
+    sunrise = getDate('24hr');
+    sunset = getDate('24hr');
   }
- 
 
   if (!timeOfDay) {
     return clear01;
-
-  } else if (
-    sunrise < getDate('time','24hr') &&
-    sunset > getDate('time','24hr')
-  ) {
+  } else if (sunrise < getDate('24hr') && sunset > getDate('24hr')) {
     switch (weatherCondition) {
       default:
-        bgOBJ.URL = clear01;
-        bgOBJ.color = '#285e9c';
+        bgImgObj = clear01;
+        bgColor = '#285e9c';
         break;
       case 'Clear':
-        bgOBJ.URL = clear01;
-        bgOBJ.color = '#285e9c';
+        bgImgObj = clear01;
+        bgColor = '#285e9c';
         break;
       case 'Clouds':
-        bgOBJ.URL = clouds01;
-        bgOBJ.color = '#008d9b';
+        bgImgObj = clouds01;
+        bgColor = '#008d9b';
         break;
       case 'Rain':
-        bgOBJ.URL = rain01;
-        bgOBJ.color = '#404149';
+        bgImgObj = rain01;
+        bgColor = '#404149';
         break;
       case 'Drizzle':
-        bgOBJ.URL = drizzle01;
-        bgOBJ.color = '#577376';
+        bgImgObj = drizzle01;
+        bgColor = '#577376';
         break;
       case 'Thunderstorm':
-        bgOBJ.URL = thunderstorm01;
-        bgOBJ.color = '#63717d';
+        bgImgObj = thunderstorm01;
+        bgColor = '#63717d';
         break;
       case 'Snow':
-        bgOBJ.URL = snow01;
-        bgOBJ.color = '#7d8aa0';
+        bgImgObj = snow01;
+        bgColor = '#7d8aa0';
         break;
       case 'Mist':
       case 'Fog':
       case 'Haze':
       case 'Smoke':
-        bgOBJ.URL = fog01;
-        bgOBJ.color = '#404049';
+        bgImgObj = fog01;
+        bgColor = '#404049';
         break;
       case 'Squall':
       case 'Tornado':
       case 'Sand':
       case 'Dust':
-        bgOBJ.URL = atmosphere01;
-        bgOBJ.color = '#8d9dae';
+        bgImgObj = atmosphere01;
+        bgColor = '#8d9dae';
         break;
     }
-    return bgOBJ;
-
+    // add bg img src to bgImg
+    bgImg = bgImgObj.src;
+    return { bgImg, bgColor };
   } else {
     switch (weatherCondition) {
       default:
-        bgOBJ.URL = clear02;
-        bgOBJ.color = '#543e3f';
+        bgImgObj = clear02;
+        bgColor = '#543e3f';
         break;
       case 'Clear':
-        bgOBJ.URL = clear02;
-        bgOBJ.color = '#543e3f';
+        bgImgObj = clear02;
+        bgColor = '#543e3f';
         break;
       case 'Clouds':
-        bgOBJ.URL = clouds02;
-        bgOBJ.color = '#082d3e';
+        bgImgObj = clouds02;
+        bgColor = '#082d3e';
         break;
       case 'Rain':
-        bgOBJ.URL = rain02;
-        bgOBJ.color = '#23495e';
+        bgImgObj = rain02;
+        bgColor = '#23495e';
         break;
       case 'Drizzle':
-        bgOBJ.URL = drizzle02;
-        bgOBJ.color = '#686868';
+        bgImgObj = drizzle02;
+        bgColor = '#686868';
         break;
       case 'Thunderstorm':
-        bgOBJ.URL = thunderstorm02;
-        bgOBJ.color = '#e9af7d';
+        bgImgObj = thunderstorm02;
+        bgColor = '#e9af7d';
         break;
       case 'Snow':
-        bgOBJ.URL = snow02;
-        bgOBJ.color = '#1e1e1e';  
+        bgImgObj = snow02;
+        bgColor = '#1e1e1e';
         break;
       case 'Mist':
       case 'Fog':
       case 'Haze':
       case 'Smoke':
-        bgOBJ.URL = fog02;
-        bgOBJ.color = '#34333b';
+        bgImgObj = fog02;
+        bgColor = '#34333b';
         break;
       case 'Squall':
       case 'Tornado':
       case 'Sand':
       case 'Dust':
-        bgOBJ.URL = atmosphere01;
-        bgOBJ.color = '#8d9dae';
+        bgImgObj = atmosphere01;
+        bgColor = '#8d9dae';
         break;
     }
-    return bgOBJ;
-  }
 
-};
+    // add bg img src to bgImg
+    bgImg = bgImgObj.src;
+    return { bgImg, bgColor };
+  }
+}

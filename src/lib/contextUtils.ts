@@ -1,11 +1,12 @@
-"use client";
+// "use client";
 
 import GetApi from './getApi';
 
-const getPosition = async () => {
+export const getPosition = async () => {
   if (!('geolocation' in navigator)) {
-    console.error('Geolocation is not available in this browser.');
-    return false;
+    const err = new Error('Geolocation is not available in this browser.');
+    console.error(err);
+    throw err;
   }
 
   try {
@@ -27,41 +28,48 @@ const getPosition = async () => {
 
     return position;
   } catch (error) {
-    if (error.code === error.PERMISSION_DENIED) {
-      console.log('User denied the request for Geolocation.');
+    if ( error instanceof GeolocationPositionError) {
+      let errorMessage = '';
 
-      return 'user denied';
-    } else if (error.code === error.POSITION_UNAVAILABLE) {
-      console.error('Location information is unavailable.');
-    } else if (error.code === error.TIMEOUT) {
-      console.error('The request to get user location timed out.');
-    } else if (error.code === error.UNKNOWN_ERROR) {
-      console.error('An unknown error occurred.');
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          errorMessage = 'User denied the request for Geolocation.';
+          break;
+        case error.POSITION_UNAVAILABLE:
+          errorMessage = 'Location information is unavailable.';
+          break;
+        case error.TIMEOUT:
+          errorMessage = 'The request to get user location timed out.';
+          break;
+        default:
+          errorMessage = 'An unknown error occurred.';
+      }
+      const err = new Error(errorMessage + ' - ' + error);
+      console.error('Users Position Error: ', err);
+      throw err;
+    } else {
+      console.error('Users Position Error: ', error);
+      throw error;
     }
-
-    return false;
+    
   }
 };
 
-
-export const getWeatherData = async () => {
+/**
+ * -- getWeatherData --
+ * This function is used to get the weather data from the OpenWeatherMap API.
+ * 
+ * @returns 
+ */
+export const getWeatherData = async (position) => {
   try {
-    const position = await getPosition();
-    console.log('position: ', position);
-    // check if position returns an object
-    if (typeof position == 'string' && position === 'user denied') {
-      return 'user denied';
-    } else if (typeof position == 'object' && position !== null) {
-      return await new GetApi('geo', position).getData();
-    } else if (typeof position == 'boolean') {
-      return false;
-    }
+    // const position = await getPosition();
+    // return the current weather data
+    return await new GetApi('geo', position).getData();
 
-    // get the current weather data
   } catch (error) {
-    console.error(
-      'There was an error in obtaining the users current position: ',
-      error
-    );
+    const err = new Error('Get Weather Data Error: ' + error);
+    console.error(err);
+    throw err;
   }
 };

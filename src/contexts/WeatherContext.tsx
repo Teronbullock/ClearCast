@@ -1,15 +1,27 @@
 "use client";
 
+import axios from 'axios';
 import { createContext, useState, useEffect } from 'react';
-import { getWeatherData } from '@/lib/contextUtils';
+import {  getPosition } from '@/lib/contextUtils';
+
 
 interface ProviderProps {
   children: React.ReactNode;
 }
 
 interface WeatherDataProps {
-  currentTemp: number;
+  currentTemp: string;
+  highTemp: string;
+  humidity: string;
+  lowTemp: string;
+  pressure: string;
+  realFeel: string;
+  sunrise: number;
+  sunset: number;
+  weatherCondition: string;
   weatherIcon: string;
+  weatherTypeDes: string;
+  wind: string;
   hourlyWeatherData: {
     id: number;
     time: string;
@@ -25,18 +37,36 @@ export const WeatherContext = createContext({
 });
 
 export const WeatherContextProvider = ({ children }: ProviderProps ) => {
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState<WeatherDataProps | null>(null);
 
   useEffect(() => {
-    getWeatherData().then( (data ) => {
+    (async ()=> {
       try {
-        setWeatherData(data);
-      } catch (error) {
-        setWeatherData(false);
-        console.log('WeatherContext useEffect error', error); 
-      }
+        const position = await getPosition();
 
-    });
+        const res = await axios.get(`/api/weather/?lat=${position.lat}&lon=${position.lon}`);
+
+        if (res.status !== 200) {
+          throw new Error('WeatherContext useEffect error');
+        }
+
+        console.log('returning data:', res.data);
+        setWeatherData(res.data.data);
+      } catch (error) { 
+        console.error('WeatherContext useEffect error', error);
+      }
+    })();
+
+
+    // getWeatherData().then( (data) => {
+    //   try {
+    //     setWeatherData(data);
+    //   } catch (error) {
+    //     setWeatherData(false);
+    //     console.log('WeatherContext useEffect error', error); 
+    //   }
+
+    // });
   }, []);
 
   const value = {
