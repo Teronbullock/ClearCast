@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import './Hero.scss';
-import { WeatherContext } from '@/contexts/WeatherContext';
+import { WeatherContext } from '@context/WeatherContext';
 import getDate from '@/lib/getDate';
 import getBackground from '@/lib/getBackground';
 
@@ -17,7 +17,7 @@ export default function Hero() {
       sunrise: weatherData.sunrise,
     };
 
-    const {bgImg} = getBackground(weatherData.weatherCondition, timeOfDay);
+    const { bgImg } = getBackground(weatherData.weatherCondition, timeOfDay);
 
     heroStyles = {
       backgroundImage: `url(${bgImg})`,
