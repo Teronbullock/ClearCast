@@ -13,7 +13,7 @@ export const WeatherDataForm = () => {
   } = useWeatherDataForm();
 
   return (
-    <form className='form w-full max-w-[85%]' onSubmit={handleFromSubmit}>
+    <form className='form w-full' onSubmit={handleFromSubmit}>
       <input
         id='form__input'
         className='form__input h-[40px] block text-center bg-[#FBFDFF00] text-xs rounded-[8px] border border-white placeholder:text-white sm:text-base w-full text-white'

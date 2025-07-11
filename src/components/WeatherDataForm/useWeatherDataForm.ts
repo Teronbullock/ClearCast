@@ -70,7 +70,12 @@ export const useWeatherDataForm = () => {
           setWeatherData(weatherData);
         }
       } catch (err) {
-        console.log('There was an error obtaining your city: ', err.message);
+        if (err instanceof Error) {
+          console.log('There was an error obtaining your city: ', err.message);
+        } else {
+          console.error(String(err));
+        }
+
         alert('There was an error obtaining your city, please try again');
       }
     } else {

@@ -1,4 +1,4 @@
-import getDate from './getDate';
+import { getDate } from './getDate';
 import { windDir, pressure } from './weatherUtility';
 
 interface HourlyWeatherList {

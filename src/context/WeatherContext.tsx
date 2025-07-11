@@ -18,6 +18,7 @@ export const WeatherContextProvider = ({
   children: React.ReactNode;
 }) => {
   const { weatherData, setWeatherData } = useGetWeatherData();
+
   const value = {
     weatherData,
     setWeatherData,

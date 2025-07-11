@@ -8,7 +8,6 @@ import { WeatherDataType } from '@app-types/weatherDataTypes';
 
 export const useGetWeatherData = () => {
   const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
-
   useEffect(() => {
     (async () => {
       try {
@@ -23,8 +22,13 @@ export const useGetWeatherData = () => {
           if (!weatherData) {
             throw new Error('WeatherContext useEffect error');
           }
-          console.log('mapped weather', weatherData);
+
           setWeatherData(weatherData);
+
+          return {
+            weatherData,
+            setWeatherData,
+          };
         }
       } catch (error) {
         console.error('WeatherContext useEffect error', error);

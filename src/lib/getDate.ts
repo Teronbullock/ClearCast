@@ -13,9 +13,12 @@ type optType = 'min' | 'DMT' | '24hr';
  * -- get date --
  * @param optType - optional type
  * @param timeInput - optional time input
- * @returns 
+ * @returns
  */
-export default function getDate(optType: optType | null = null, timeInput: null | number = null) {
+
+export const getDate = (optType?: optType, timeInput?: number | null) => {
+  // const { optType } = props ?? {};
+  // let { timeInput } = props ?? {};
   let date;
 
   const opt: optInterface = {
@@ -50,4 +53,4 @@ export default function getDate(optType: optType | null = null, timeInput: null 
   }
 
   return date.toLocaleTimeString('en-US', opt);
-}
+};

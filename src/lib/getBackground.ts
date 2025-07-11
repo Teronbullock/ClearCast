@@ -1,5 +1,5 @@
 import { StaticImageData } from 'next/image';
-import getDate from '@/lib/getDate';
+import { getDate } from '@/lib/getDate';
 import clear01 from '../../public/assets/img/clear01.jpg';
 import clear02 from '../../public/assets/img/clear02.jpg';
 import clouds01 from '../../public/assets/img/clouds01.jpg';
@@ -16,17 +16,10 @@ import fog01 from '../../public/assets/img/fog01.jpg';
 import fog02 from '../../public/assets/img/fog02.jpg';
 import atmosphere01 from '../../public/assets/img/atmosphere01.jpg';
 
-interface TimeOfDayInterface {
-  sunrise: number;
-  sunset: number;
-}
-
-
-export default function getBackground(
+export const getBackground = (
   weatherCondition: string,
-  timeOfDay: TimeOfDayInterface
-) {
-
+  timeOfDay: { sunrise: number; sunset: number }
+): { bgImg: string; bgColor: string } => {
   let bgImgObj: StaticImageData;
   let bgColor = '';
   let bgImg = '';
@@ -42,14 +35,11 @@ export default function getBackground(
   }
 
   if (!timeOfDay) {
-    return clear01;
+    bgImgObj = clear01;
   } else if (sunrise < getDate('24hr') && sunset > getDate('24hr')) {
     switch (weatherCondition) {
-      default:
-        bgImgObj = clear01;
-        bgColor = '#285e9c';
-        break;
       case 'Clear':
+      default:
         bgImgObj = clear01;
         bgColor = '#285e9c';
         break;
@@ -88,16 +78,10 @@ export default function getBackground(
         bgColor = '#8d9dae';
         break;
     }
-    // add bg img src to bgImg
-    bgImg = bgImgObj.src;
-    return { bgImg, bgColor };
   } else {
     switch (weatherCondition) {
-      default:
-        bgImgObj = clear02;
-        bgColor = '#543e3f';
-        break;
       case 'Clear':
+      default:
         bgImgObj = clear02;
         bgColor = '#543e3f';
         break;
@@ -136,9 +120,10 @@ export default function getBackground(
         bgColor = '#8d9dae';
         break;
     }
-
-    // add bg img src to bgImg
-    bgImg = bgImgObj.src;
-    return { bgImg, bgColor };
   }
-}
+
+  // add bg img src to bgImg
+  bgImg = bgImgObj.src;
+
+  return { bgImg, bgColor };
+};

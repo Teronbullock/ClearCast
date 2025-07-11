@@ -1,4 +1,4 @@
-export function windDir(input: number) {
+export const windDir = (input: number) => {
   let deg;
 
   if (input >= 350 || input <= 19) {
@@ -34,9 +34,9 @@ export function windDir(input: number) {
   }
 
   return deg;
-}
+};
 
-export function pressure(input: number) {
+export const pressure = (input: number) => {
   const pressureInput = input / 33.864;
   return pressureInput.toFixed(2);
-}
+};

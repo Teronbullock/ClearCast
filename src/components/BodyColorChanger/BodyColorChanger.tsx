@@ -2,19 +2,19 @@
 
 import { useContext } from 'react';
 import { WeatherContext } from '@/context/WeatherContext';
-import getBackground from '@/lib/getBackground';
+import { getBackground } from '@/lib/getBackground';
 
 const BodyColorChange = () => {
   const { weatherData } = useContext(WeatherContext);
+  const { sunset, sunrise, weatherCondition } = weatherData ?? {};
 
-  console.log('bodyBG: ', weatherData);
-
-  const timeOfDay = {
-    sunset: weatherData?.sunset,
-    sunrise: weatherData?.sunrise,
-  };
-
-  const { bgColor } = getBackground(weatherData?.weatherCondition, timeOfDay);
+  const bgColor =
+    sunset && sunrise && weatherCondition
+      ? getBackground(weatherCondition, {
+          sunrise,
+          sunset,
+        }).bgColor
+      : null;
 
   return bgColor;
 };
