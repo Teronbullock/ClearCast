@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-import { WeatherContextProvider } from '@context/WeatherContext';
-import AppBody from '@/components/Body';
 import { Header } from '@/components/Header/Header';
 import './globals.css';
 
@@ -15,14 +13,12 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <WeatherContextProvider>
-      <html lang='en'>
-        <body>
-          <Header />
-          <AppBody>{children}</AppBody>
-        </body>
-      </html>
-    </WeatherContextProvider>
+    <html lang='en'>
+      <body>
+        <Header />
+        {children}
+      </body>
+    </html>
   );
 };
 

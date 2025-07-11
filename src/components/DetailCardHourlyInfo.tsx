@@ -4,7 +4,7 @@ import { WeatherContext } from '@context/WeatherContext';
 
 const DetailCardHourlyInfo = () => {
   const { weatherData } = useContext(WeatherContext);
-
+  console.log('data', weatherData);
   if (weatherData === null || undefined) {
     return (
       <div className='hourly-weather flex justify-center items-center min-h-[90px]'>
@@ -34,8 +34,8 @@ const DetailCardHourlyInfo = () => {
               {weatherData ? `${weatherData.currentTemp}° ` : ''}
             </p>
           </div>
-          {weatherData.hourlyWeatherData
-            ? Object.values(weatherData.hourlyWeatherData).map(list => (
+          {weatherData.hourlyWeather
+            ? Object.values(weatherData.hourlyWeather).map(list => (
                 <div key={list.id} className='hourly-weather__item w-full'>
                   <p className='hourly-weather__text m-0 text-base md:text-lg'>
                     {list.time}

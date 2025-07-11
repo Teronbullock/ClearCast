@@ -2,10 +2,10 @@
 
 import { signIn, signOut } from '@lib/auth';
 
-export async function NextAuthLogin() {
+export const NextAuthLogin = async () => {
   await signIn('github', { redirectTo: '/dashboard' });
-}
+};
 
-export async function NextAuthLogout() {
+export const NextAuthLogout = async () => {
   await signOut({ redirectTo: '/' });
-}
+};

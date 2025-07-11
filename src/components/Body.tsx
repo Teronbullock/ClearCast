@@ -1,28 +1,20 @@
 'use client';
-import React from 'react';
-import getBackground from '@lib/getBackground';
+import { ReactNode } from 'react';
+import { getBackground } from '@lib/getBackground';
 import UseWeatherContext from '@context/hooks/UseWeatherContext';
 
-interface AppBodyProps {
-  children: React.ReactNode;
-}
-
-const Body: React.FC<AppBodyProps> = ({ children }) => {
+export const Body = ({ children }: { children: ReactNode }) => {
   const { weatherData } = UseWeatherContext();
-  let appBodyStyle: { backgroundColor: string } | null = null;
-
-  if (weatherData) {
-    const timeOfDay = {
-      sunset: weatherData?.sunset,
-      sunrise: weatherData?.sunrise,
-    };
-
-    const { bgColor } = getBackground(weatherData?.weatherCondition, timeOfDay);
-
-    appBodyStyle = {
-      backgroundColor: bgColor,
-    };
-  }
+  const { sunrise, sunset, weatherCondition } = weatherData ?? {};
+  const appBodyStyle =
+    sunrise && sunset && weatherCondition
+      ? {
+          backgroundColor: getBackground(weatherCondition, {
+            sunrise,
+            sunset,
+          }).bgColor,
+        }
+      : null;
 
   return (
     <div
@@ -36,5 +28,3 @@ const Body: React.FC<AppBodyProps> = ({ children }) => {
     </div>
   );
 };
-
-export default Body;

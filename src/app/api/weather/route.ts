@@ -1,7 +1,7 @@
 import { type NextRequest } from 'next/server';
 import { getWeatherData } from '@/lib/getWeatherData';
 
-export async function GET(request: NextRequest) {
+export const GET = async (request: NextRequest) => {
   const searchParams = request.nextUrl.searchParams;
   const lat = searchParams.get('lat');
   const lon = searchParams.get('lon');
@@ -20,4 +20,4 @@ export async function GET(request: NextRequest) {
       error: error,
     });
   }
-}
+};
