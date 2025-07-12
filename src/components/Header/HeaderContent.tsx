@@ -1,6 +1,6 @@
 'use client';
 
-import { MdOutlineMenu } from 'react-icons/md';
+// import { MdOutlineMenu } from 'react-icons/md';
 import { useHeader } from './useHeader';
 import { WeatherDataForm } from '@/components/WeatherDataForm/WeatherDataForm';
 import MobileMenu from '@components/MobileMenu';
