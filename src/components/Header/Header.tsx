@@ -6,7 +6,7 @@ export const Header = async () => {
   const isLoggedIn = session?.user ? true : false;
 
   return (
-    <header className='app-header absolute left-0 top-0 w-full z-[50] py-3'>
+    <header className='app-header absolute left-0 top-0 w-full z-[50] py-3 xl:w-1/2 xl:left-[25%] '>
       <HeaderContainer isLoggedIn={isLoggedIn} />
     </header>
   );
