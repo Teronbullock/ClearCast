@@ -1,17 +1,17 @@
 import { type NextRequest } from 'next/server';
-import { getWeatherData } from '@/lib/getWeatherData';
+// import { getWeatherData } from '@/lib/getWeatherData';
 
 export const GET = async (request: NextRequest) => {
-  const searchParams = request.nextUrl.searchParams;
-  const lat = searchParams.get('lat');
-  const lon = searchParams.get('lon');
+  // const searchParams = request.nextUrl.searchParams;
+  // const lat = searchParams.get('lat');
+  // const lon = searchParams.get('lon');
 
   try {
-    const res = await getWeatherData({ lat, lon });
+    // const res = await getWeatherData({ lat, lon });
 
     return Response.json({
       status: 200,
-      data: res,
+      // data: res,
     });
   } catch (error) {
     console.error('This was an error:', error);
