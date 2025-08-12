@@ -4,7 +4,7 @@ import { WeatherContext } from '@context/WeatherContext';
 
 const DetailCardHourlyInfo = () => {
   const { weatherData } = useContext(WeatherContext);
-  console.log('data', weatherData);
+
   if (weatherData === null || undefined) {
     return (
       <div className='hourly-weather flex justify-center items-center min-h-[90px]'>

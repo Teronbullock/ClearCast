@@ -7,7 +7,7 @@ interface optInterface {
   day?: 'numeric' | '2-digit' | undefined;
 }
 
-type optType = 'min' | 'DMT' | '24hr';
+type optType = 'min' | 'DMT' | '24hr' | null;
 
 /**
  * -- get date --

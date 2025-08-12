@@ -1,37 +1,15 @@
 import { getDate } from './getDate';
 import { windDir, pressure } from './weatherUtility';
+import {
+  WeatherRawData,
+  HourlyWeatherList,
+  HourlyWeather,
+} from '@/types/weatherDataTypes';
 
-interface HourlyWeatherList {
-  clouds: object;
-  dt: number;
-  dt_txt: string;
-  main: {
-    feels_like: number;
-    grnd_level: number;
-    humidity: number;
-    pressure: number;
-    sea_level: number;
-    temp: number;
-    temp_kf: number;
-    temp_max: number;
-    temp_min: number;
-  };
-  pop: number;
-  rain: object;
-  sys: object;
-  visibility: number;
-  weather: [
-    {
-      description: string;
-      icon: string;
-      id: number;
-      main: string;
-    }
-  ];
-  wind: object;
-}
-
-export const mapWeatherData = (data: { current: any; hourly: any }) => {
+export const mapWeatherData = (data: {
+  current: WeatherRawData;
+  hourly: HourlyWeather;
+}) => {
   return {
     location: data.current.name,
     currentTemp: `${Math.round(data.current.main.temp)}°`,
