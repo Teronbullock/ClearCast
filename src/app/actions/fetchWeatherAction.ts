@@ -1,15 +1,15 @@
 'use server';
 
-import { WeatherApiClient } from '@lib/WeatherApiClient';
+import { getWeatherData } from '@lib/getWeatherData';
 
 export const fetchWeatherAction = async (position: {
   lat: number;
   lon: number;
 }) => {
-  const res = await new WeatherApiClient('geo', {
+  const res = await getWeatherData('geo', {
     lat: position.lat,
     lon: position.lon,
-  }).getData();
+  });
 
   return res;
 };

@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent } from 'react';
 import UseWeatherContext from '@context/hooks/UseWeatherContext';
-import { WeatherApiClient } from '@/lib/WeatherApiClient';
+import { getWeatherData } from '@lib/getWeatherData';
 import { mapWeatherData } from '@/lib/mapWeatherData';
 
 export const useWeatherDataForm = () => {
@@ -44,9 +44,9 @@ export const useWeatherDataForm = () => {
 
     if (isZipCode) {
       try {
-        const rawWeatherData = await new WeatherApiClient('zip', {
+        const rawWeatherData = await getWeatherData('zip', {
           string: inputValue,
-        }).getData();
+        });
         const weatherData = mapWeatherData(rawWeatherData);
 
         if (weatherData && setWeatherData) {
@@ -59,9 +59,9 @@ export const useWeatherDataForm = () => {
       }
     } else if (isCity2DigitState || isCityState) {
       try {
-        const rawWeatherData = await new WeatherApiClient('city', {
+        const rawWeatherData = await getWeatherData('city', {
           string: inputValue,
-        }).getData();
+        });
 
         const weatherData = mapWeatherData(rawWeatherData);
 
