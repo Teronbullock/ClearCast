@@ -6,7 +6,7 @@ export const getWeatherData = async (
   localType: string,
   inputValue: { string?: string; lat?: number; lon?: number }
 ) => {
-  const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+  const apiKey = process.env.WEATHER_API_KEY;
   const baseUrl = 'https://api.openweathermap.org/data/2.5/';
   const zip = `?zip=${inputValue.string},us&units=imperial&appid=${apiKey}`;
   const city = `?q=${inputValue.string},us&units=imperial&appid=${apiKey}`;
