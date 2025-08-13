@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Header } from '@/components/Header/Header';
+import { Header } from '@components/Header/Header';
+import { WeatherContextProvider } from '@context/WeatherContext';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -15,8 +16,10 @@ const RootLayout = ({
   return (
     <html lang='en'>
       <body>
-        <Header />
-        {children}
+        <WeatherContextProvider>
+          <Header />
+          {children}
+        </WeatherContextProvider>
       </body>
     </html>
   );

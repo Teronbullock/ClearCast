@@ -1,10 +1,11 @@
 'use client';
 import { ReactNode } from 'react';
 import { getBackground } from '@lib/getBackground';
-import UseWeatherContext from '@context/hooks/UseWeatherContext';
+import useWeatherContext from '@hooks/useWeatherContext';
 
 export const Body = ({ children }: { children: ReactNode }) => {
-  const { weatherData } = UseWeatherContext();
+  const { weatherState } = useWeatherContext();
+  const weatherData = weatherState?.weatherData;
   const { sunrise, sunset, weatherCondition } = weatherData ?? {};
   const appBodyStyle =
     sunrise && sunset && weatherCondition

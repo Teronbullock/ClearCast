@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, ChangeEvent } from 'react';
-import UseWeatherContext from '@context/hooks/UseWeatherContext';
-import { getWeatherData } from '@lib/getWeatherData';
-import { mapWeatherData } from '@/lib/mapWeatherData';
+import useWeatherContext from '@hooks/useWeatherContext';
+import { getWeatherData } from '@/app/actions/getWeatherData';
+import { mapWeatherData } from '@lib/mapWeatherData';
 
 export const useWeatherDataForm = () => {
-  const { setWeatherData } = UseWeatherContext();
+  const { setWeatherState } = useWeatherContext();
   const [inputValue, setInputValue] = useState('');
   const [isPlaceholder, setIsPlaceholder] = useState(true);
 
@@ -42,6 +42,13 @@ export const useWeatherDataForm = () => {
     const isCity2DigitState = city2DigitStateRegex.test(inputValue);
     const isCityState = cityStateRegex.test(inputValue);
 
+    if (setWeatherState) {
+      setWeatherState({
+        status: 'loading',
+        weatherData: null,
+      });
+    }
+
     if (isZipCode) {
       try {
         const rawWeatherData = await getWeatherData('zip', {
@@ -49,9 +56,11 @@ export const useWeatherDataForm = () => {
         });
         const weatherData = mapWeatherData(rawWeatherData);
 
-        if (weatherData && setWeatherData) {
-          console.log('zip:', weatherData);
-          setWeatherData(weatherData);
+        if (weatherData && setWeatherState) {
+          setWeatherState({
+            status: 'success',
+            weatherData,
+          });
         }
       } catch (err) {
         console.log('There was an error obtaining your city', err);
@@ -65,9 +74,11 @@ export const useWeatherDataForm = () => {
 
         const weatherData = mapWeatherData(rawWeatherData);
 
-        if (weatherData && setWeatherData) {
-          console.log('city zip:', weatherData);
-          setWeatherData(weatherData);
+        if (weatherData && setWeatherState) {
+          setWeatherState({
+            status: 'success',
+            weatherData,
+          });
         }
       } catch (err) {
         if (err instanceof Error) {

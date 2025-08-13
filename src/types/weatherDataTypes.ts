@@ -77,3 +77,9 @@ export interface HourlyWeatherList {
 export interface HourlyWeather {
   list: HourlyWeatherList[];
 }
+
+export interface WeatherState {
+  status: 'idle' | 'loading' | 'success' | 'error';
+  weatherData: WeatherDataType | null;
+  error?: string | null;
+}

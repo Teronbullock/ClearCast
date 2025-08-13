@@ -1,6 +1,6 @@
 'use client';
 
-import { useWeatherDataForm } from './useWeatherDataForm';
+import { useWeatherDataForm } from '@hooks/useWeatherDataForm';
 
 export const WeatherDataForm = () => {
   const {

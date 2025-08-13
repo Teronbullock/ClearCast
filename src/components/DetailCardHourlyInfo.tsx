@@ -1,19 +1,11 @@
-import { useContext } from 'react';
 import Image from 'next/image';
-import { WeatherContext } from '@context/WeatherContext';
+import useWeatherContext from '@hooks/useWeatherContext';
 
 const DetailCardHourlyInfo = () => {
-  const { weatherData } = useContext(WeatherContext);
+  const { weatherState } = useWeatherContext();
+  const weatherData = weatherState?.weatherData;
 
-  if (weatherData === null || undefined) {
-    return (
-      <div className='hourly-weather flex justify-center items-center min-h-[90px]'>
-        <p className='hourly-weather__text m-0 text-base md:text-lg'>
-          Loading...
-        </p>
-      </div>
-    );
-  } else if (weatherData) {
+  if (weatherState?.status === 'success') {
     return (
       <>
         <div className='hourly-weather flex justify-center items-center min-h-[90px]'>
@@ -34,7 +26,7 @@ const DetailCardHourlyInfo = () => {
               {weatherData ? `${weatherData.currentTemp}° ` : ''}
             </p>
           </div>
-          {weatherData.hourlyWeather
+          {weatherData?.hourlyWeather
             ? Object.values(weatherData.hourlyWeather).map(list => (
                 <div key={list.id} className='hourly-weather__item w-full'>
                   <p className='hourly-weather__text m-0 text-base md:text-lg'>
@@ -60,6 +52,8 @@ const DetailCardHourlyInfo = () => {
         </div>
       </>
     );
+  } else {
+    return <></>;
   }
 };
 
