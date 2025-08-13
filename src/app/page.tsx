@@ -1,12 +1,74 @@
 'use client';
-import { WeatherContextProvider } from '@context/WeatherContext';
-import { IndexContent } from '@/components/page-views/IndexContent';
+
+import { Body } from '@components/Body';
+import { Hero } from '@components/Hero/Hero';
+import DetailCardHourlyInfo from '@components/DetailCardHourlyInfo';
+import { DetailCard } from '@components/DetailCard';
+import DetailCardInfo from '@components/DetailCardInfo';
+import useWeatherContext from '@hooks/useWeatherContext';
+import { getDate } from '@lib/getDate';
 
 const IndexPage = () => {
+  const { weatherState } = useWeatherContext();
+  const weatherData = weatherState?.weatherData;
+  const sunrise = weatherData ? getDate('min', weatherData.sunrise) : 'N/A';
+  const sunset = weatherData ? getDate('min', weatherData.sunset) : 'N/A';
+
   return (
-    <WeatherContextProvider>
-      <IndexContent />
-    </WeatherContextProvider>
+    <>
+      <Body>
+        <Hero />
+        {weatherData ? (
+          <>
+            <DetailCard>
+              <DetailCardHourlyInfo />
+            </DetailCard>
+            <DetailCard>
+              <DetailCardInfo
+                data={[
+                  {
+                    title: 'Sunrise',
+                    info: sunrise,
+                  },
+                  {
+                    title: 'Sunset',
+                    info: sunset,
+                  },
+                ]}
+              />
+            </DetailCard>
+            <DetailCard>
+              <DetailCardInfo
+                data={[
+                  {
+                    title: 'Humidity',
+                    info: weatherData.humidity,
+                  },
+                  {
+                    title: 'Pressure',
+                    info: weatherData.pressure,
+                  },
+                ]}
+              />
+            </DetailCard>
+            <DetailCard>
+              <DetailCardInfo
+                data={[
+                  {
+                    title: 'Wind',
+                    info: weatherData.wind,
+                  },
+                  {
+                    title: 'Feels Like',
+                    info: weatherData.realFeel,
+                  },
+                ]}
+              />
+            </DetailCard>
+          </>
+        ) : null}
+      </Body>
+    </>
   );
 };
 

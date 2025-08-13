@@ -1,5 +1,5 @@
 import { StaticImageData } from 'next/image';
-import { getDate } from '@/lib/getDate';
+import { getDate } from '@lib/getDate';
 import clear01 from '../../public/assets/img/clear01.jpg';
 import clear02 from '../../public/assets/img/clear02.jpg';
 import clouds01 from '../../public/assets/img/clouds01.jpg';

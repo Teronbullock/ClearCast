@@ -1,9 +1,9 @@
 'use client';
 
 import { useContext } from 'react';
-import { WeatherContext } from '../WeatherContext';
+import { WeatherContext } from '@context/WeatherContext';
 
-const UseWeatherContext = () => {
+const useWeatherContext = () => {
   const context = useContext(WeatherContext);
 
   if (context === undefined) {
@@ -13,4 +13,4 @@ const UseWeatherContext = () => {
   return context;
 };
 
-export default UseWeatherContext;
+export default useWeatherContext;

@@ -1,6 +1,6 @@
 'use server';
 
-import { getWeatherData } from '@lib/getWeatherData';
+import { getWeatherData } from '@/app/actions/getWeatherData';
 
 export const fetchWeatherAction = async (position: {
   lat: number;

@@ -1,15 +1,20 @@
 'use client';
 
-import { createContext, Dispatch, SetStateAction } from 'react';
-import { useGetWeatherData } from '@/hooks/useGetWeatherData';
-import { WeatherDataType } from '@app-types/weatherDataTypes';
+import { useState } from 'react';
+import React, { createContext, Dispatch, SetStateAction } from 'react';
+import { useGeoWeatherData } from '@hooks/useGeoWeatherData';
+import { WeatherState } from '@app-types/weatherDataTypes';
 
 export const WeatherContext = createContext<{
-  weatherData?: WeatherDataType | null;
-  setWeatherData?: Dispatch<SetStateAction<WeatherDataType | null>> | null;
+  weatherState?: WeatherState;
+  setWeatherState?: Dispatch<SetStateAction<WeatherState>>;
 }>({
-  weatherData: null,
-  setWeatherData: () => null,
+  weatherState: {
+    status: 'idle',
+    weatherData: null,
+    error: null,
+  },
+  setWeatherState: () => null,
 });
 
 export const WeatherContextProvider = ({
@@ -17,12 +22,15 @@ export const WeatherContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { weatherData, setWeatherData } = useGetWeatherData();
+  const [weatherState, setWeatherState] = useState<WeatherState>({
+    status: 'idle',
+    weatherData: null,
+    error: null,
+  });
 
-  const value = {
-    weatherData,
-    setWeatherData,
-  };
+  useGeoWeatherData(setWeatherState);
+
+  const value = { weatherState, setWeatherState };
 
   return (
     <WeatherContext.Provider value={value}>{children}</WeatherContext.Provider>

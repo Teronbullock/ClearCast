@@ -24,7 +24,7 @@
       "@lib/*": ["./src/lib/*"],
       "@app/*": ["./src/app/*"],
       "@context/*": ["./src/context/*"],
-      "@hook/*": ["./src/hook/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@actions/*": ["./src/app/actions/*"],
       "@app-types/*": ["./src/types/*"]
     }
