@@ -2,95 +2,57 @@
 
 import { useState, ChangeEvent } from 'react';
 import useWeatherContext from '@hooks/useWeatherContext';
-import { getWeatherData } from '@/app/actions/getWeatherData';
-import { mapWeatherData } from '@lib/mapWeatherData';
+import { fetchWeather } from '@lib/fetchWeather';
+import { VALIDATION_REGEX } from '@/constants/validation';
+import { WeatherState } from '@/types/weatherDataTypes';
 
 export const useWeatherDataForm = () => {
   const { setWeatherState } = useWeatherContext();
   const [inputValue, setInputValue] = useState('');
-  const [isPlaceholder, setIsPlaceholder] = useState(true);
+  const isPlaceholder = inputValue.length === 0;
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-
-    if (e.target.value.length === 0) {
-      setIsPlaceholder(true);
-    } else {
-      setIsPlaceholder(false);
-    }
   };
 
   const handleInputFocus = () => {
-    setIsPlaceholder(false);
+    if (inputValue.length === 0) setInputValue('');
   };
 
-  const handInputBlur = () => {
-    if (inputValue.length === 0) {
-      setIsPlaceholder(true);
-    }
+  const handleInputBlur = () => {
+    if (inputValue.trim() === '') setInputValue('');
   };
 
   const handleFromSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const trimmedInput = inputValue.trim();
+    let weatherDataObj: WeatherState;
 
-    // check if input value is a zip code or city, state
-    const zipCodeRegex = /^\d{5}$/;
-    const city2DigitStateRegex = /^[A-Za-z\s]+,\s*[A-Za-z]{2}$/;
-    const cityStateRegex = /^[A-Za-z\s]+,\s[A-Za-z\s]+$/;
+    // check for input type then fetch data
+    if (VALIDATION_REGEX.zipCode.test(trimmedInput)) {
+      weatherDataObj = await fetchWeather('zip', inputValue);
+    } else if (VALIDATION_REGEX.cityState.test(trimmedInput)) {
+      weatherDataObj = await fetchWeather('city', inputValue);
+    } else {
+      weatherDataObj = {
+        status: 'error',
+        weatherData: null,
+        error: 'Invalid user input',
+      };
+      console.error('Invalid user input');
+      console.dir('Invalid user input');
+    }
 
-    const isZipCode = zipCodeRegex.test(inputValue);
-    const isCity2DigitState = city2DigitStateRegex.test(inputValue);
-    const isCityState = cityStateRegex.test(inputValue);
-
-    if (setWeatherState) {
+    // update state
+    if (setWeatherState && weatherDataObj) {
+      setWeatherState(weatherDataObj);
+    } else if (setWeatherState) {
       setWeatherState({
-        status: 'loading',
+        status: 'idle',
         weatherData: null,
       });
     }
 
-    if (isZipCode) {
-      try {
-        const rawWeatherData = await getWeatherData('zip', {
-          string: inputValue,
-        });
-        const weatherData = mapWeatherData(rawWeatherData);
-
-        if (weatherData && setWeatherState) {
-          setWeatherState({
-            status: 'success',
-            weatherData,
-          });
-        }
-      } catch (err) {
-        console.log('There was an error obtaining your city', err);
-        alert('There was an error obtaining your city, please try again');
-      }
-    } else if (isCity2DigitState || isCityState) {
-      try {
-        const rawWeatherData = await getWeatherData('city', {
-          string: inputValue,
-        });
-
-        const weatherData = mapWeatherData(rawWeatherData);
-
-        if (weatherData && setWeatherState) {
-          setWeatherState({
-            status: 'success',
-            weatherData,
-          });
-        }
-      } catch (err) {
-        if (err instanceof Error) {
-          console.log('There was an error obtaining your city: ', err.message);
-        } else {
-          console.error(String(err));
-        }
-
-        alert('There was an error obtaining your city, please try again');
-      }
-    } else {
-    }
     // clear form input
     setInputValue('');
   };
@@ -99,7 +61,7 @@ export const useWeatherDataForm = () => {
     isPlaceholder,
     handleInputChange,
     handleInputFocus,
-    handInputBlur,
+    handleInputBlur,
     handleFromSubmit,
     inputValue,
   };

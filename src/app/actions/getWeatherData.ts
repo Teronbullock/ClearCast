@@ -34,11 +34,6 @@ export const getWeatherData = async (
       axios.get(`${baseUrl}forecast${endingUrl}`),
     ]);
 
-    // console.log('Weather Res object:', {
-    //   current: currentRes.data,
-    //   hourly: hourlyRes.data,
-    // });
-
     return {
       current: currentRes.data,
       hourly: hourlyRes.data,
