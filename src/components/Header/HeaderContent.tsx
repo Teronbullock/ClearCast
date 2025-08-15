@@ -14,7 +14,7 @@ export const HeaderContainer = ({ isLoggedIn }: Props) => {
 
   return (
     <div className='header-content'>
-      <div className='flex items-center justify-between h-[50px] w-full px-4'>
+      <div className='flex items-center justify-between w-full px-4'>
         <WeatherDataForm />
         {/* <button className='account-icon' onClick={mobileMenuStateHandler}>
           <MdOutlineMenu className='account-icon-svg h-[40px] w-[40px] text-white ms-3' />
