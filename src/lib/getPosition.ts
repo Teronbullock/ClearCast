@@ -1,12 +1,16 @@
-// "use client";
+type PositionType =
+  | { success: true; lat: number; lon: number }
+  | { success: false; reason: string };
 
 /**
  * Gets the user's current geolocation coordinates.
+ * @returns An object representing the result of the geolocation attempt.
+ *
+ * It can be one of two types:
+ * - A success object with {`success: true`, `lat:`, `lon:`}.
+ * - A failure object with {`success: false`, `reason:` string}.
  */
-export const getPosition = async (): Promise<
-  | { success: true; lat: number; lon: number }
-  | { success: false; reason: string }
-> => {
+export const getPosition = async (): Promise<PositionType> => {
   if (!('geolocation' in navigator)) {
     return {
       success: false,

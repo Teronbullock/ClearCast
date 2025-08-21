@@ -1,6 +1,6 @@
 import { getWeatherData } from '@/app/actions/getWeatherData';
 import { mapWeatherData } from '@lib/mapWeatherData';
-import { WeatherState } from '@/types/weatherDataTypes';
+import { WeatherState } from '@app-types/weatherDataTypes';
 
 export const fetchWeather = async (
   type: 'zip' | 'city',

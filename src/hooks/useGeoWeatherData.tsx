@@ -1,12 +1,15 @@
 'use client';
 
-import { Dispatch, SetStateAction } from 'react';
-import { useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { getPosition } from '@lib/getPosition';
 import { getWeatherData } from '@actions/getWeatherData';
 import { mapWeatherData } from '@lib/mapWeatherData';
-import { WeatherState } from '@/types/weatherDataTypes';
+import { WeatherState } from '@app-types/weatherDataTypes';
 
+/**
+ * A custom Hook to fetch weather data based on geolocation and updates the provided state.
+ *
+ */
 export const useGeoWeatherData = (
   setWeatherState: Dispatch<SetStateAction<WeatherState>>
 ) => {

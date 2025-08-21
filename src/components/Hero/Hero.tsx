@@ -1,6 +1,6 @@
 import './Hero.scss';
 import useWeatherContext from '@hooks/useWeatherContext';
-import { getDate } from '@lib/getDate';
+import { formatDateTime } from '@/lib/dateUtils';
 import { getBackground } from '@lib/getBackground';
 
 export const Hero = () => {
@@ -9,7 +9,7 @@ export const Hero = () => {
   const weatherStatus = weatherState?.status;
   const weatherError = weatherState?.error;
 
-  const time = getDate('DMT');
+  const time = formatDateTime('dateAndTime');
   const { sunset, sunrise, weatherCondition } = weatherData ?? {};
   const heroStyles =
     sunset && sunrise && weatherCondition

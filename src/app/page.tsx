@@ -6,13 +6,17 @@ import DetailCardHourlyInfo from '@components/DetailCardHourlyInfo';
 import { DetailCard } from '@components/DetailCard';
 import DetailCardInfo from '@components/DetailCardInfo';
 import useWeatherContext from '@hooks/useWeatherContext';
-import { getDate } from '@lib/getDate';
+import { formatDateTime } from '@/lib/dateUtils';
 
 const IndexPage = () => {
   const { weatherState } = useWeatherContext();
   const weatherData = weatherState?.weatherData;
-  const sunrise = weatherData ? getDate('min', weatherData.sunrise) : 'N/A';
-  const sunset = weatherData ? getDate('min', weatherData.sunset) : 'N/A';
+  const sunrise = weatherData
+    ? formatDateTime('timeWithMinutes', weatherData.sunrise)
+    : 'N/A';
+  const sunset = weatherData
+    ? formatDateTime('timeWithMinutes', weatherData.sunset)
+    : 'N/A';
 
   return (
     <>
@@ -20,9 +24,7 @@ const IndexPage = () => {
         <Hero />
         {weatherData ? (
           <>
-            <DetailCard>
-              <DetailCardHourlyInfo />
-            </DetailCard>
+            <DetailCardHourlyInfo />
             <DetailCard>
               <DetailCardInfo
                 data={[

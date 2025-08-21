@@ -1,4 +1,95 @@
-export interface WeatherDataType {
+export interface BaseWeather {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
+export interface BaseWeatherResponse {
+  id: number;
+  name: string;
+  coord: {
+    lat: number;
+    lon: number;
+  };
+  timezone: number;
+}
+
+export interface BaseMain {
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+  temp_min: number;
+  temp_max: number;
+  sea_level?: number;
+  grnd_level?: number;
+  temp_kf?: number;
+}
+
+export interface Wind {
+  speed: number;
+  deg: number;
+  gust: number;
+}
+
+export interface HourlyForecastItem {
+  dt: number;
+  time: number;
+  max: number;
+  min: number;
+  main: BaseMain;
+  weather: BaseWeather[];
+  clouds: {
+    all: number;
+  };
+  wind: Wind;
+  visibility: number;
+  pop: number;
+  sys: {
+    pod: string;
+  };
+}
+
+export interface CurrentWeatherResponse extends BaseWeatherResponse {
+  weather: BaseWeather[];
+  base: string;
+  main: BaseMain;
+  visibility: number;
+  wind: Wind;
+  rain: {
+    '1h': number;
+  };
+  clouds: {
+    all: number;
+  };
+  dt: number;
+  sys: {
+    type: number;
+    id: number;
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
+  cod: number;
+}
+
+export interface City extends BaseWeatherResponse {
+  country: string;
+  population: number;
+  sunrise: number;
+  sunset: number;
+}
+
+export interface HourlyForecastResponse {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: HourlyForecastItem[];
+  city: City;
+}
+
+export interface WeatherModel {
   currentTemp: string;
   highTemp: string;
   hourlyWeather: {
@@ -20,66 +111,13 @@ export interface WeatherDataType {
   wind: string;
 }
 
-export interface WeatherRawData {
-  base: string;
-  clouds: {
-    all: number;
-  };
-  cod: number;
-  coord: {
-    lat: number;
-    lon: number;
-  };
-  dt: number;
-  id: number;
-  main: {
-    feels_like: number;
-    grnd_level?: number;
-    humidity: number;
-    pressure: number;
-    sea_level?: number;
-    temp: number;
-    temp_max: number;
-    temp_min: number;
-  };
-  name: string;
-  sys: {
-    country: string;
-    id: number;
-    sunrise: number;
-    sunset: number;
-    type: number;
-    timezone: number;
-    visibility: number;
-  };
-  weather: {
-    id: number;
-    main: string;
-    icon: string;
-    description: string;
-  }[];
-  wind: {
-    speed: number;
-    deg: number;
-  };
-}
-
-export interface HourlyWeatherList {
-  dt: number;
-  main: {
-    temp: number;
-  };
-  weather: {
-    icon: string;
-  }[];
-}
-
-export interface HourlyWeather {
-  list: HourlyWeatherList[];
+export interface CombinedWeatherResponse {
+  current: CurrentWeatherResponse;
+  hourly: HourlyForecastResponse;
 }
 
 export interface WeatherState {
   status: 'idle' | 'loading' | 'success' | 'error';
-  weatherData: WeatherDataType | null;
+  weatherData: WeatherModel | null;
   error?: string | null;
 }
