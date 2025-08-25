@@ -5,8 +5,9 @@ import { Hero } from '@components/Hero/Hero';
 import DetailCardHourlyInfo from '@components/DetailCardHourlyInfo';
 import { DetailCard } from '@components/DetailCard';
 import DetailCardInfo from '@components/DetailCardInfo';
+import { DetailDailyInfo } from '@components/DetailDailyInfo';
 import useWeatherContext from '@hooks/useWeatherContext';
-import { formatDateTime } from '@/lib/dateUtils';
+import { formatDateTime } from '@lib/dateUtils';
 
 const IndexPage = () => {
   const { weatherState } = useWeatherContext();
@@ -25,6 +26,7 @@ const IndexPage = () => {
         {weatherData ? (
           <>
             <DetailCardHourlyInfo />
+            <DetailDailyInfo />
             <DetailCard>
               <DetailCardInfo
                 data={[

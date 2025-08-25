@@ -50,5 +50,12 @@ export const formatDateTime = (
     ? { ...formatOptions[formatType], timeZone: 'UTC' }
     : formatOptions[formatType];
 
-  return new Intl.DateTimeFormat(locale, options).format(date);
+  let results = new Intl.DateTimeFormat(locale, options).format(date);
+
+  if (formatType === 'dayAndWeekday') {
+    const resultsArray = results.split(' ').reverse();
+    results = resultsArray.toString().replace(',', ' ');
+  }
+
+  return results;
 };

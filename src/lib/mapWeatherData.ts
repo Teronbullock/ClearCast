@@ -8,8 +8,8 @@ import { getDailyAverages } from '@lib/getDailyAverages';
 
 export const mapWeatherData = (data: CombinedWeatherResponse) => {
   const { current, hourly } = data;
-  console.log('Maps: hourly - ', hourly);
-  console.log('Maps: current - ', current);
+  console.log('Maps: Data', data);
+
   return {
     location: current.name,
     currentTemp: `${Math.round(current.main.temp)}°`,

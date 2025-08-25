@@ -50,13 +50,13 @@ export const getWeatherData = async (
       axios.get(`${baseUrl}forecast${endingUrl}`),
     ]);
 
-    console.log('current:', currentRes.data);
-    console.log('Hourly:', hourlyRes.data);
-
-    return {
+    const results = {
       current: currentRes.data,
       hourly: hourlyRes.data,
     };
+    console.log('current:', results);
+
+    return results;
   } catch (err) {
     console.error(`Error in obtaining weather data: ${err}`);
     throw err;

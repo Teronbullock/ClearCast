@@ -46,6 +46,9 @@ export interface HourlyForecastItem {
   wind: Wind;
   visibility: number;
   pop: number;
+  rain?: {
+    '3h'?: number;
+  };
   sys: {
     pod: string;
   };
