@@ -1,4 +1,4 @@
-import React from 'react';
+import { DetailCard } from '@components/DetailCard';
 
 interface InfoProps {
   data: {
@@ -7,21 +7,28 @@ interface InfoProps {
   }[];
 }
 
-const DetailCardInfo = ({ data }: InfoProps) => {
+export const DetailCardInfo = ({ data }: InfoProps) => {
   return (
-    <div className='detail-info grid grid-cols-2 grid-rows-[40px] md:grid-rows-[55px] items-center w-[95%]'>
-      {data.map((item, index) => (
-        <div className='detail-info__item text-white' key={index}>
-          <p className='detail-info__content text-base md:text-lg tracking-[1px] mt-2'>
-            {item.title}
-          </p>
-          <p className='detail-info__content text-sm md:text-base lg:text-lg mt-2'>
-            {item.info}
-          </p>
-        </div>
-      ))}
-    </div>
+    <DetailCard>
+      <div className='detail-info grid auto-cols-auto grid-cols-3'>
+        {data.map((item, index) => (
+          <>
+            <div key={index} className=' items-center w-full'>
+              <div className='detail-info__item text-white'>
+                <p className='detail-info__content text-base md:text-lg tracking-[1px] mt-2'>
+                  {item.title}
+                </p>
+                <p className='detail-info__content text-sm md:text-base lg:text-lg mt-2'>
+                  {item.info}
+                </p>
+              </div>
+            </div>
+            {index < data.length - 1 && (
+              <div className='w-[1px] h-full bg-white mx-auto'></div>
+            )}
+          </>
+        ))}
+      </div>
+    </DetailCard>
   );
 };
-
-export default DetailCardInfo;

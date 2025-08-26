@@ -54,6 +54,13 @@ export interface HourlyForecastItem {
   };
 }
 
+export interface DailyAverage {
+  date: string;
+  temp: number;
+  description: string;
+  icon: string;
+}
+
 export interface CurrentWeatherResponse extends BaseWeatherResponse {
   weather: BaseWeather[];
   base: string;
@@ -112,6 +119,7 @@ export interface WeatherModel {
   weatherIcon: string;
   weatherTypeDes: string;
   wind: string;
+  dailyAvg: DailyAverage[];
 }
 
 export interface CombinedWeatherResponse {

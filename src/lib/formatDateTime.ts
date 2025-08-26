@@ -3,7 +3,6 @@ type FormatType =
   | 'time24hr'
   | 'timeWithMinutes'
   | 'dateAndTime'
-  | 'weekdayDay'
   | 'dayAndWeekday'
   | 'monthAndDay';
 

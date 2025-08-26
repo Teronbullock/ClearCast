@@ -54,7 +54,6 @@ export const getWeatherData = async (
       current: currentRes.data,
       hourly: hourlyRes.data,
     };
-    console.log('current:', results);
 
     return results;
   } catch (err) {

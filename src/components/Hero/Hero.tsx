@@ -1,6 +1,5 @@
 import './Hero.scss';
 import useWeatherContext from '@hooks/useWeatherContext';
-import { formatDateTime } from '@/lib/dateUtils';
 import { getBackground } from '@lib/getBackground';
 
 export const Hero = () => {
@@ -9,7 +8,6 @@ export const Hero = () => {
   const weatherStatus = weatherState?.status;
   const weatherError = weatherState?.error;
 
-  const time = formatDateTime('dateAndTime');
   const { sunset, sunrise, weatherCondition } = weatherData ?? {};
   const heroStyles =
     sunset && sunrise && weatherCondition
@@ -60,23 +58,23 @@ export const Hero = () => {
         </p>
       ) : weatherStatus === 'success' ? (
         <>
-          <div className='hero-section mb-5'>
-            <p className='hero-info-standout text-[1.5rem] font-semibold sm:text-2xl md:text-3xl hero-info-standout--top mb-3'>
+          <div className='hero-section mb-2'>
+            <p className='hero-info-standout text-[1.5rem] sm:text-2xl md:text-3xl hero-info-standout--top'>
               {weatherData?.location}
             </p>
-            <p className='hero-info-small m-0 text-[1.3rem] sm:text-xl'>
-              {time}
+            <p className='hero-info-small m-0 text-[1.125rem] sm:text-xl'>
+              {/* {time} */}
             </p>
           </div>
-          <div className='hero-section mb-5'>
-            <p className='hero-info-standout text-[1.5rem] font-semibold sm:text-2xl md:text-3xl'>
-              {weatherData?.weatherTypeDes}
-            </p>
-            <p className='hero-current-temp m-0 text-center text-[4rem] sm:text-[4rem] md:text-[4.68rem]'>
+          <div className='hero-section'>
+            <p className='hero-current-temp m-0 text-center text-[4rem] sm:text-[4rem] md:text-[4.68rem] font-light'>
               {weatherData?.currentTemp}
             </p>
+            <p className='hero-info-standout text-[1.25rem] sm:text-2xl md:text-3xl mb-1'>
+              {weatherData?.weatherTypeDes}
+            </p>
             <p className='hero-info-small m-0 text-[1.3rem] sm:text-xl'>
-              Hi {weatherData?.highTemp} / Lo {weatherData?.lowTemp}
+              H:{weatherData?.highTemp} L:{weatherData?.lowTemp}
             </p>
           </div>
         </>

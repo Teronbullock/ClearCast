@@ -1,63 +1,53 @@
-import { formatDateTime } from '@lib/dateUtils';
-import { HourlyForecastItem } from '@app-types/weatherDataTypes';
-
-type DailyAverage = {
-  date: string;
-  count: number;
-  minTemp: number;
-  maxTemp: number;
-};
+import { formatDateTime } from '@lib/formatDateTime';
+import { HourlyForecastItem, DailyAverage } from '@app-types/weatherDataTypes';
 
 type DailyMapType = {
-  maxSum: number;
-  minSum: number;
-  count: number;
-  main: string;
+  temp: number;
+  icon: string;
+  description: string;
 };
 
 export const getDailyAverages = (
   forecast: HourlyForecastItem[]
 ): DailyAverage[] => {
-  // console.log('forecast:', forecast);
-  // const todayDate = formatDateTime('monthAndDay').replace('/', '-');
   const todayDate = formatDateTime('dayAndWeekday');
   const dailyMap: Record<string, DailyMapType> = {};
 
-  forecast.forEach((item, index) => {
-    let ranListDates = new Set();
-    const listDate = formatDateTime('dayAndWeekday', item.dt);
+  forecast.forEach(item => {
+    const itemDate = formatDateTime('dayAndWeekday', item.dt);
+    const itemTime = formatDateTime('time12hr', item.dt).replace(' ', '');
 
-    if (listDate === todayDate) {
+    if (itemDate === todayDate) {
       return;
     }
 
-    if (!dailyMap[listDate]) {
-      dailyMap[listDate] = { maxSum: 0, minSum: 0, count: 0, main: '' };
+    if (!dailyMap[itemDate]) {
+      dailyMap[itemDate] = {
+        temp: 0,
+        description: '',
+        icon: '',
+      };
     }
 
-    if (!ranListDates.has(listDate)) {
-      dailyMap[listDate].main = item.weather[0].main;
+    if ('11AM' === itemTime) {
+      dailyMap[itemDate].description = item.weather[0].description;
+      dailyMap[itemDate].icon = item.weather[0].icon;
+      dailyMap[itemDate].temp = Math.round(item.main.temp);
+    } else if ('2AM' === itemTime) {
+      dailyMap[itemDate].description = item.weather[0].description;
+      dailyMap[itemDate].icon = item.weather[0].icon;
+      dailyMap[itemDate].temp = Math.round(item.main.temp);
     }
-
-    dailyMap[listDate].maxSum += item.main.temp_max;
-    dailyMap[listDate].minSum += item.main.temp_min;
-    dailyMap[listDate].count += 1;
-
-    ranListDates.add(listDate);
   });
 
-  console.log('MapT', dailyMap);
   const dailyMapObj = Object.entries(dailyMap).map(
-    ([date, { minSum, maxSum, count, main }]) => ({
-      date,
-      minTemp: Math.round(minSum / count),
-      maxTemp: Math.round(maxSum / count),
-      count,
-      main,
+    ([date, { temp, description, icon }]) => ({
+      date: date.split(' ')[0],
+      temp,
+      description,
+      icon,
     })
   );
-
-  console.log('daily Map Obj', dailyMapObj);
 
   return dailyMapObj;
 };

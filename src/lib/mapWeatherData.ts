@@ -1,4 +1,4 @@
-import { formatDateTime } from '@lib/dateUtils';
+import { formatDateTime } from '@lib/formatDateTime';
 import { windDir, pressure } from './weatherUtility';
 import {
   CombinedWeatherResponse,
@@ -8,7 +8,6 @@ import { getDailyAverages } from '@lib/getDailyAverages';
 
 export const mapWeatherData = (data: CombinedWeatherResponse) => {
   const { current, hourly } = data;
-  console.log('Maps: Data', data);
 
   return {
     location: current.name,
