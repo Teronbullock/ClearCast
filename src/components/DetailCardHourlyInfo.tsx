@@ -9,7 +9,7 @@ const DetailCardHourlyInfo = () => {
   if (weatherState?.status === 'success') {
     return (
       <DetailCard innerClassName='overflow-x-auto'>
-        <div className='hourly-weather pb-[1rem] flex justify-center items-center min-h-[90px] overflow-auto w-[680px]'>
+        <div className='hourly-weather pb-[1rem] flex justify-center items-center min-h-[90px] overflow-auto w-[650px] xs:w-[900px] sm:w-[1000px] lg:w-[1500px]'>
           <div className='hourly-weather__item w-full'>
             <p className='hourly-weather__text m-0 text-base md:text-lg'>Now</p>
             <Image

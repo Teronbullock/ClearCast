@@ -23,7 +23,7 @@ export const Body = ({ children }: { children: ReactNode }) => {
       id='app-body'
       style={{ ...appBodyStyle }}
     >
-      <div className='app-body-container mt-[3.5rem] md:max-w-max-[70%] md:mx-auto xl:w-1/2'>
+      <div className='app-body-container mt-[3.5rem] md:max-w-max-[70%] sm:mx-auto sm:w-[640px] lg:w-[940px] xl:w-[1240px]'>
         {children}
       </div>
     </div>

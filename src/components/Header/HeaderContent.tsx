@@ -13,7 +13,7 @@ export const HeaderContainer = ({ isLoggedIn }: Props) => {
   const { mobileMenuStateHandler, isMenuOpen } = useHeader();
 
   return (
-    <div className='header-content'>
+    <div className='header-content sm:mx-auto sm:w-[640px] lg:w-[940px] xl:w-[1240px]'>
       <div className='flex items-center justify-between w-full px-4'>
         <WeatherDataForm />
         {/* <button className='account-icon' onClick={mobileMenuStateHandler}>

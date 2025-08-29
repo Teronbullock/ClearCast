@@ -15,7 +15,7 @@ export const DetailDailyInfo = () => {
           {Object.values(dailyAvg).map((list, index) => (
             <div
               key={index}
-              className='grid grid-cols-4 gap-2 mb-[.75rem] items-center border-t pt-2'
+              className='grid grid-cols-3 xs:grid-cols-4 gap-2 mb-[.75rem] items-center border-t pt-2'
             >
               <span className='text-left mr-2'>{list.date}</span>
               {list.icon && (
@@ -33,7 +33,9 @@ export const DetailDailyInfo = () => {
                   />
                 </div>
               )}
-              <div className='text-left'>{list.description}</div>
+              <div className='text-left hidden xs:block'>
+                {list.description}
+              </div>
               <span className='text-right'>{list.temp}°</span>
             </div>
           ))}
