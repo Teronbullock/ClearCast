@@ -23,47 +23,51 @@ const IndexPage = () => {
       <Body>
         <Hero />
         {weatherData ? (
-          <>
-            <DetailCardHourlyInfo />
-            <DetailDailyInfo />
-            <DetailCardInfo
-              data={[
-                {
-                  title: 'Sunrise',
-                  info: sunrise,
-                },
-                {
-                  title: 'Sunset',
-                  info: sunset,
-                },
-              ]}
-            />
-            <DetailCardInfo
-              data={[
-                {
-                  title: 'Humidity',
-                  info: weatherData.humidity,
-                },
-                {
-                  title: 'Pressure',
-                  info: weatherData.pressure,
-                },
-              ]}
-            />
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+            <div>
+              <DetailCardHourlyInfo />
+              <DetailDailyInfo />
+            </div>
+            <div className='align-top'>
+              <DetailCardInfo
+                data={[
+                  {
+                    title: 'Sunrise',
+                    info: sunrise,
+                  },
+                  {
+                    title: 'Sunset',
+                    info: sunset,
+                  },
+                ]}
+              />
+              <DetailCardInfo
+                data={[
+                  {
+                    title: 'Humidity',
+                    info: weatherData.humidity,
+                  },
+                  {
+                    title: 'Pressure',
+                    info: weatherData.pressure,
+                  },
+                ]}
+              />
 
-            <DetailCardInfo
-              data={[
-                {
-                  title: 'Wind',
-                  info: weatherData.wind,
-                },
-                {
-                  title: 'Feels Like',
-                  info: weatherData.realFeel,
-                },
-              ]}
-            />
-          </>
+              <DetailCardInfo
+                data={[
+                  {
+                    title: 'Wind',
+                    info: weatherData.wind,
+                  },
+                  {
+                    title: 'Feels Like',
+                    info: weatherData.realFeel,
+                  },
+                ]}
+              />
+            </div>
+          </div>
         ) : null}
       </Body>
     </>
