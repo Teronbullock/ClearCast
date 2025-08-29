@@ -1,5 +1,5 @@
 import { StaticImageData } from 'next/image';
-import { getDate } from '@lib/getDate';
+import { formatDateTime } from '@lib/formatDateTime';
 import clear01 from '../../public/assets/img/clear01.jpg';
 import clear02 from '../../public/assets/img/clear02.jpg';
 import clouds01 from '../../public/assets/img/clouds01.jpg';
@@ -27,16 +27,19 @@ export const getBackground = (
   let sunset;
 
   if (timeOfDay) {
-    sunrise = getDate('24hr', timeOfDay.sunrise);
-    sunset = getDate('24hr', timeOfDay.sunset);
+    sunrise = formatDateTime('time24hr', timeOfDay.sunrise);
+    sunset = formatDateTime('time24hr', timeOfDay.sunset);
   } else {
-    sunrise = getDate('24hr');
-    sunset = getDate('24hr');
+    sunrise = formatDateTime('time24hr');
+    sunset = formatDateTime('time24hr');
   }
 
   if (!timeOfDay) {
     bgImgObj = clear01;
-  } else if (sunrise < getDate('24hr') && sunset > getDate('24hr')) {
+  } else if (
+    sunrise < formatDateTime('time24hr') &&
+    sunset > formatDateTime('time24hr')
+  ) {
     switch (weatherCondition) {
       case 'Clear':
       default:

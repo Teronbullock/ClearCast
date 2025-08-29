@@ -4,7 +4,7 @@ import { useState, ChangeEvent } from 'react';
 import useWeatherContext from '@hooks/useWeatherContext';
 import { fetchWeather } from '@lib/fetchWeather';
 import { VALIDATION_REGEX } from '@/constants/validation';
-import { WeatherState } from '@/types/weatherDataTypes';
+import { WeatherState } from '@app-types/weatherDataTypes';
 
 export const useWeatherDataForm = () => {
   const { setWeatherState } = useWeatherContext();

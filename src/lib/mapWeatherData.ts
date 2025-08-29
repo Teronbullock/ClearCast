@@ -1,38 +1,41 @@
-import { getDate } from './getDate';
+import { formatDateTime } from '@lib/formatDateTime';
 import { windDir, pressure } from './weatherUtility';
 import {
-  WeatherRawData,
-  HourlyWeatherList,
-  HourlyWeather,
-} from '@/types/weatherDataTypes';
+  CombinedWeatherResponse,
+  HourlyForecastItem,
+} from '@app-types/weatherDataTypes';
+import { getDailyAverages } from '@lib/getDailyAverages';
 
-export const mapWeatherData = (data: {
-  current: WeatherRawData;
-  hourly: HourlyWeather;
-}) => {
+export const mapWeatherData = (data: CombinedWeatherResponse) => {
+  const { current, hourly } = data;
+
   return {
-    location: data.current.name,
-    currentTemp: `${Math.round(data.current.main.temp)}°`,
-    highTemp: `${Math.round(data.current.main.temp_max)}°`,
-    lowTemp: `${Math.round(data.current.main.temp_min)}°`,
-    realFeel: `${Math.round(data.current.main.feels_like)}°`,
-    pressure: `${pressure(data.current.main.pressure)} in`,
-    humidity: `${data.current.main.humidity}%`,
-    weatherCondition: data.current.weather[0].main,
-    weatherTypeDes: data.current.weather[0].description,
-    weatherIcon: data.current.weather[0].icon,
-    sunrise: data.current.sys.sunrise,
-    sunset: data.current.sys.sunset,
-    wind: `${windDir(data.current.wind.deg)} ${data.current.wind.speed}mph `,
-    hourlyWeather: data.hourly.list
-      .slice(0, 4)
-      .map((list: HourlyWeatherList, index: number) => {
+    location: current.name,
+    currentTemp: `${Math.round(current.main.temp)}°`,
+    highTemp: `${Math.round(current.main.temp_max)}°`,
+    lowTemp: `${Math.round(current.main.temp_min)}°`,
+    realFeel: `${Math.round(current.main.feels_like)}°`,
+    pressure: `${pressure(current.main.pressure)} in`,
+    humidity: `${current.main.humidity}%`,
+    weatherCondition: current.weather[0].main,
+    weatherTypeDes: current.weather[0].description,
+    weatherIcon: current.weather[0].icon,
+    sunrise: current.sys.sunrise,
+    sunset: current.sys.sunset,
+    wind: `${windDir(current.wind.deg)} ${current.wind.speed}mph `,
+    hourlyWeather: hourly.list
+      .slice(0, 9)
+      .map((list: HourlyForecastItem, index: number) => {
         return {
           id: index.toString(),
-          time: getDate(null, list.dt),
-          weatherIcon: list.weather[0].icon,
+          time: formatDateTime('time12hr', list.dt, current.timezone),
           temp: `${Math.round(list.main.temp)}°`,
+          max: `${Math.round(list.main.temp_max)}`,
+          min: `${Math.round(list.main.temp_min)}`,
+          weatherIcon: list.weather[0].icon,
+          wind: `${windDir(list.wind.deg)} ${list.wind.speed}mph `,
         };
       }),
+    dailyAvg: getDailyAverages(hourly.list),
   };
 };
