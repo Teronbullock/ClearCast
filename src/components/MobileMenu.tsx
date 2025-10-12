@@ -11,7 +11,7 @@ type MobileMenuType = {
   isLoggedIn?: boolean;
 };
 
-const MobileMenu = ({
+export const MobileMenu = ({
   classes,
   isMenuOpen,
   closeBtnHandler,
@@ -23,7 +23,7 @@ const MobileMenu = ({
       className={classNames(
         'fixed top-0 left-0 bottom-0 bg-white z-[500] transition-width duration-300 ease-in-out delay-100 overflow-hidden text-center',
         {
-          'w-full lg:w-0': isMenuOpen,
+          'w-full': isMenuOpen,
         },
         {
           'w-0 transition-all duration-300 ease-in-out': !isMenuOpen,
@@ -40,15 +40,14 @@ const MobileMenu = ({
       <div className='text-black flex flex-col text-[2rem]'>
         {isLoggedIn ? (
           <>
-          <Link href='/cities'>
-          </Link>
-          <button
-            onClick={() => {
-              NextAuthLogout();
-            }}
-          >
-            Logout
-          </button>
+            <Link href='/cities'></Link>
+            <button
+              onClick={() => {
+                NextAuthLogout();
+              }}
+            >
+              Logout
+            </button>
           </>
         ) : (
           <>
@@ -64,5 +63,3 @@ const MobileMenu = ({
     </div>
   );
 };
-
-export default MobileMenu;

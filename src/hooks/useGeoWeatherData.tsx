@@ -28,6 +28,7 @@ export const useGeoWeatherData = (
             lat: position.lat,
             lon: position.lon,
           });
+
           const weatherData = mapWeatherData(rawWeatherData);
           if (!weatherData) {
             throw new Error('WeatherContext useEffect error');

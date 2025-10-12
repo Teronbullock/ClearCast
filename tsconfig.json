@@ -26,7 +26,8 @@
       "@context/*": ["./src/context/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@actions/*": ["./src/app/actions/*"],
-      "@app-types/*": ["./src/types/*"]
+      "@app-types/*": ["./src/types/*"],
+      "@db/*": ["./src/database/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

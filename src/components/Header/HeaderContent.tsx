@@ -1,9 +1,9 @@
 'use client';
 
-// import { MdOutlineMenu } from 'react-icons/md';
+import { MdOutlineMenu } from 'react-icons/md';
 import { useHeader } from './useHeader';
 import { WeatherDataForm } from '@components/WeatherDataForm/WeatherDataForm';
-import MobileMenu from '@components/MobileMenu';
+import { MobileMenu } from '@components/MobileMenu';
 
 type Props = {
   isLoggedIn: boolean;
@@ -16,9 +16,9 @@ export const HeaderContainer = ({ isLoggedIn }: Props) => {
     <div className='header-content sm:mx-auto sm:w-[640px] lg:w-[940px] xl:w-[1240px]'>
       <div className='flex items-center justify-between w-full px-4'>
         <WeatherDataForm />
-        {/* <button className='account-icon' onClick={mobileMenuStateHandler}>
+        <button className='account-icon' onClick={mobileMenuStateHandler}>
           <MdOutlineMenu className='account-icon-svg h-[40px] w-[40px] text-white ms-3' />
-        </button> */}
+        </button>
       </div>
       <MobileMenu
         classes='py-[4rem]'
