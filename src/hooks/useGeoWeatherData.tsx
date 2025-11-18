@@ -14,7 +14,7 @@ export const useGeoWeatherData = (
   setWeatherState: Dispatch<SetStateAction<WeatherState>>
 ) => {
   useEffect(() => {
-    (async () => {
+    const getGeoData = async () => {
       try {
         setWeatherState({
           status: 'loading',
@@ -23,32 +23,38 @@ export const useGeoWeatherData = (
 
         const position = await getPosition();
 
-        if (position.success === true) {
-          const rawWeatherData = await getWeatherData('geo', {
-            lat: position.lat,
-            lon: position.lon,
-          });
-          const weatherData = mapWeatherData(rawWeatherData);
-          if (!weatherData) {
-            throw new Error('WeatherContext useEffect error');
-          }
-
-          setWeatherState({
-            status: 'success',
-            weatherData: weatherData,
-          });
-          return;
-        } else {
+        if (position.success === false) {
           setWeatherState({
             status: 'error',
             weatherData: null,
             error: position.reason,
           });
           console.error(position.reason);
+          throw new Error(position.reason);
         }
+
+        const rawWeatherData = await getWeatherData('geo', {
+          lat: position.lat,
+          lon: position.lon,
+        });
+
+        const weatherData = mapWeatherData(rawWeatherData);
+
+        if (!weatherData) {
+          throw new Error('WeatherContext useEffect error');
+        }
+
+        setWeatherState({
+          status: 'success',
+          weatherData: weatherData,
+        });
+
+        return;
       } catch (error) {
         console.error('WeatherContext useEffect error', error);
       }
-    })();
+    };
+
+    getGeoData();
   }, [setWeatherState]);
 };

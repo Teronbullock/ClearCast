@@ -1,5 +1,5 @@
 import './Hero.scss';
-import useWeatherContext from '@hooks/useWeatherContext';
+import { useWeatherContext } from '@context/weather';
 import { getBackground } from '@lib/getBackground';
 
 export const Hero = () => {

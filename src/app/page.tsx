@@ -5,7 +5,7 @@ import { Hero } from '@components/Hero/Hero';
 import DetailCardHourlyInfo from '@components/DetailCardHourlyInfo';
 import { DetailCardInfo } from '@components/DetailCardInfo';
 import { DetailDailyInfo } from '@components/DetailDailyInfo';
-import useWeatherContext from '@hooks/useWeatherContext';
+import { useWeatherContext } from '@context/weather';
 import { formatDateTime } from '@lib/formatDateTime';
 
 const IndexPage = () => {

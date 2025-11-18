@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Header } from '@components/Header/Header';
-import { WeatherContextProvider } from '@context/WeatherContext';
+import { WeatherContextProvider } from '@context/weather';
 import './globals.css';
 
 export const metadata: Metadata = {
