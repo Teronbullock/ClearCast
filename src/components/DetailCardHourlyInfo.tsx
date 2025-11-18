@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { DetailCard } from '@components/DetailCard';
-import useWeatherContext from '@hooks/useWeatherContext';
+import { useWeatherContext } from '@context/weather';
 
 const DetailCardHourlyInfo = () => {
   const { weatherState } = useWeatherContext();

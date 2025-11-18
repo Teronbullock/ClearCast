@@ -1,5 +1,5 @@
 import { DetailCard } from './DetailCard';
-import useWeatherContext from '@hooks/useWeatherContext';
+import { useWeatherContext } from '@context/weather';
 import Image from 'next/image';
 
 export const DetailDailyInfo = () => {

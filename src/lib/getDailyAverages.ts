@@ -29,11 +29,11 @@ export const getDailyAverages = (
       };
     }
 
-    if ('11AM' === itemTime) {
+    if ('11AM' === itemTime || '10AM' === itemTime) {
       dailyMap[itemDate].description = item.weather[0].description;
       dailyMap[itemDate].icon = item.weather[0].icon;
       dailyMap[itemDate].temp = Math.round(item.main.temp);
-    } else if ('2AM' === itemTime) {
+    } else if ('2AM' === itemTime || '1AM' === itemTime) {
       dailyMap[itemDate].description = item.weather[0].description;
       dailyMap[itemDate].icon = item.weather[0].icon;
       dailyMap[itemDate].temp = Math.round(item.main.temp);

@@ -1,7 +1,7 @@
 'use client';
 import { ReactNode } from 'react';
 import { getBackground } from '@lib/getBackground';
-import useWeatherContext from '@hooks/useWeatherContext';
+import { useWeatherContext } from '@context/weather';
 
 export const Body = ({ children }: { children: ReactNode }) => {
   const { weatherState } = useWeatherContext();
